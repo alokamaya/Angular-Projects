@@ -1,0 +1,35 @@
+.lb-outerContainer {
+  max-width: 720px;
+  max-height: 720px;
+}
+.lb-dataContainer {
+  max-width: 220px; /* For the text below image */
+}
+
+.cell_pic_bdr {
+  height: auto !important;
+  width: auto !important;
+  max-width: 100%;
+  text-align: center !important;
+  margin-bottom: 30px;
+  margin-right: auto;
+  margin-left: auto;
+  margin-top: 0px;
+  display: block;
+  border-top-width: 0px;
+  border-right-width: 0px;
+  border-bottom-width: 0px;
+  border-left-width: 0px;
+  border-top-style: solid;
+  border-right-style: solid;
+  border-bottom-style: solid;
+  border-left-style: solid;
+  border-top-color: #fff;
+  border-right-color: #fff;
+  border-bottom-color: #fff;
+  border-left-color: #fff;
+}
+
+.border-shadow {
+  box-shadow: -0px 10px 20px #000 !important;
+}

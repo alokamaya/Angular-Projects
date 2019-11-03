@@ -1,0 +1,55 @@
+<app-showcase-slider></app-showcase-slider>
+<section id="blog" class="py-3">
+  <div class="container">
+    <div class="row">
+      <div class="col">
+        <div class="card-columns">
+          <div class="card" *ngFor="let destination of destinations">
+            <img
+              src="{{ destination.photoUrls[random] }}"
+              alt=""
+              class="img-fluid card-img-top"
+            />
+            <div class="card-body">
+              <h4 class="card-title">{{ destination.destinationName }}</h4>
+              <small class="text-muted"
+                >Visited by {{ destination.visitedBy }} on
+                {{ destination.travelDate | date: 'dd/MM/yyyy' }}</small
+              >
+              <hr />
+              <p class="card-text">
+                {{
+                  destination.description.length > 6
+                    ? (destination.description | slice: 0:250) + '..'
+                    : destination.description
+                }}
+              </p>
+              <a
+                [routerLink]="['/gallery', destination.destinationName]"
+                class="stretched-link"
+              ></a>
+            </div>
+          </div>
+
+          <div class="card">
+            <img
+              src="../../assets/images/destinations/new/new_destination.jpg"
+              alt=""
+              class="img-fluid card-img-top"
+              style="width: 20rem; height: 15rem;"
+            />
+            <div class="card-body">
+              <h4 class="card-title">Any new Trip!!!</h4>
+              <p class="card-text">
+                Travel to a new place makes you a kid again. It essentially puts
+                you neurally in the same position as when you were a child. So
+                what are the places you have been to??
+              </p>
+              <a class="btn btn-primary">Add New Vacation Trip</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

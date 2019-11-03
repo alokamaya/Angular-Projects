@@ -1,0 +1,33 @@
+<div class="container">
+  <form class="form-inline mt-4 mb-3" (ngSubmit)="onStockAdd()" #f="ngForm">
+    <div class="form-group mx-sm-3 mb-2">
+      <input
+        type="text"
+        class="form-control"
+        id="inputPassword2"
+        placeholder="Add Ticker"
+        name="tikcerName"
+        ngModel
+      />
+    </div>
+    <button type="submit" class="btn btn-primary mb-2">Find Price</button>
+  </form>
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th scope="col">Name</th>
+        <th scope="col">Price</th>
+        <th scope="col">Currency</th>
+        <th scope="col">Bid Price</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let stock of stocks">
+        <td>{{ stock.name }}</td>
+        <td>{{ stock.price }}</td>
+        <td>{{ stock.currency }}</td>
+        <td>{{ stock.bid }}</td>
+      </tr>
+    </tbody>
+  </table>
+</div>

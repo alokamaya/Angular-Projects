@@ -1,0 +1,174 @@
+<div class="container">
+  <div class="mt-2 mb-2">
+    <button class="btn btn-primary" (click)="onNewFeedComposition()">
+      <mat-icon>add</mat-icon> New Feed composition
+    </button>
+    <button class="btn btn-info ml-2" (click)="onFeedFormulation()">
+      <mat-icon>build </mat-icon> Feed Formulation
+    </button>
+    <mat-form-field class="clear-search-field ml-3">
+      <input
+        matInput
+        type="text"
+        placeholder="Search Feed with anything"
+        [(ngModel)]="searchText"
+        (keyup)="applyFilter()"
+        autocomplete="off"
+      />
+      <button
+        mat-button
+        *ngIf="searchText"
+        matSuffix
+        mat-icon-button
+        aria-label="Clear"
+        (click)="onSearchClear()"
+      >
+        <mat-icon>close</mat-icon>
+      </button>
+    </mat-form-field>
+  </div>
+
+  <div class="mat-elevation-z8">
+    <mat-table [dataSource]="feedListDataSource">
+      <!--- Note that these columns can be defined in any order.
+          The actual rendered columns are set as a property on the row definition" -->
+
+      <ng-container matColumnDef="Action">
+        <mat-header-cell *matHeaderCellDef></mat-header-cell>
+        <mat-cell *matCellDef="let element">
+          <button
+            mat-icon-button
+            class="mr-1"
+            title="Edit Feed Composition"
+            (click)="onEditFeedComposition(element)"
+          >
+            <mat-icon color="primary">edit</mat-icon>
+          </button>
+          <button
+            mat-icon-button
+            title="Delete Feed Composition"
+            (click)="onDelete(element)"
+          >
+            <mat-icon color="warn">delete</mat-icon>
+          </button>
+        </mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="Feed-Stuff">
+        <mat-header-cell *matHeaderCellDef>Feed-Stuff</mat-header-cell>
+        <mat-cell *matCellDef="let element">{{
+          element.feedStuffName
+        }}</mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="Feed Type">
+        <mat-header-cell *matHeaderCellDef>Feed Type</mat-header-cell>
+        <mat-cell *matCellDef="let element">{{
+          element.feedStuffType
+        }}</mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="Dry Matter (%)">
+        <mat-header-cell *matHeaderCellDef>Dry Matter (%)</mat-header-cell>
+        <mat-cell *matCellDef="let element">{{ element.dryMatter }}</mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="ME (Kcal/kg)">
+        <mat-header-cell *matHeaderCellDef>ME (Kcal/kg)</mat-header-cell>
+        <mat-cell *matCellDef="let element">{{ element.me }}</mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="Protein (%)">
+        <mat-header-cell *matHeaderCellDef>Protein (%)</mat-header-cell>
+        <mat-cell *matCellDef="let element">{{ element.protein }}</mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="Crude Fiber (%)">
+        <mat-header-cell *matHeaderCellDef>Crude Fiber (%)</mat-header-cell>
+        <mat-cell *matCellDef="let element">{{ element.crudFiber }}</mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="Ether Extract (%)">
+        <mat-header-cell *matHeaderCellDef>Ether Extract (%)</mat-header-cell>
+        <mat-cell *matCellDef="let element">{{
+          element.etherExtract
+        }}</mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="NFE (%)">
+        <mat-header-cell *matHeaderCellDef>NFE (%)</mat-header-cell>
+        <mat-cell *matCellDef="let element">{{ element.nfe }}</mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="Calcium (%)">
+        <mat-header-cell *matHeaderCellDef>Calcium (%)</mat-header-cell>
+        <mat-cell *matCellDef="let element">{{ element.calcium }}</mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="Phosphorus (%)">
+        <mat-header-cell *matHeaderCellDef>Phosphorus (%)</mat-header-cell>
+        <mat-cell *matCellDef="let element">{{ element.phosphorus }}</mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="Copper (mg/kg)">
+        <mat-header-cell *matHeaderCellDef>Copper (mg/kg)</mat-header-cell>
+        <mat-cell *matCellDef="let element">{{ element.copper }}</mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="Iron (mg/kg)">
+        <mat-header-cell *matHeaderCellDef>Iron (mg/kg)</mat-header-cell>
+        <mat-cell *matCellDef="let element">{{ element.iron }}</mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="Manganese">
+        <mat-header-cell *matHeaderCellDef>Manganese</mat-header-cell>
+        <mat-cell *matCellDef="let element">{{ element.manganese }}</mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="Sodium (%)">
+        <mat-header-cell *matHeaderCellDef>Sodium (%)</mat-header-cell>
+        <mat-cell *matCellDef="let element">{{ element.sodium }}</mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="Zinc (mg/kg)">
+        <mat-header-cell *matHeaderCellDef>Zinc (mg/kg)</mat-header-cell>
+        <mat-cell *matCellDef="let element">{{ element.zinc }}</mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="loading">
+        <mat-footer-cell *matFooterCellDef colspan="6">
+          Loading data...
+        </mat-footer-cell>
+      </ng-container>
+      <ng-container matColumnDef="noData">
+        <mat-footer-cell *matFooterCellDef colspan="6">
+          No data.
+        </mat-footer-cell>
+      </ng-container>
+
+      <mat-header-row
+        *matHeaderRowDef="feedListDisplayColumns"
+      ></mat-header-row>
+      <mat-row *matRowDef="let row; columns: feedListDisplayColumns"></mat-row>
+
+      <mat-footer-row
+        *matFooterRowDef="['loading']"
+        [ngClass]="{ hide: feedListDataSource != null }"
+      ></mat-footer-row>
+
+      <mat-footer-row
+        *matFooterRowDef="['noData']"
+        [ngClass]="{
+          hide: !(
+            feedListDataSource != null && feedListDataSource.data.length == 0
+          )
+        }"
+      ></mat-footer-row>
+    </mat-table>
+
+    <mat-paginator
+      [pageSizeOptions]="[5, 10, 20]"
+      showFirstLastButtons
+    ></mat-paginator>
+  </div>
+</div>
